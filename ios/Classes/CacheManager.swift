@@ -208,6 +208,7 @@ extension CacheManager: CachingPlayerItemDelegate {
     func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {
         // A track is downloaded. Saving it to the cache asynchronously.
         storage?.async.setObject(data, forKey: playerItem.cacheKey ?? playerItem.url.absoluteString, completion: { _ in })
+        NSLog("Finish Downloading...")
         self.completionHandler?(true)
     }
 
@@ -215,7 +216,7 @@ extension CacheManager: CachingPlayerItemDelegate {
         /// Is called every time a new portion of data is received.
         let percentage = Double(bytesDownloaded)/Double(bytesExpected)*100.0
         let str = String(format: "%.1f%%", percentage)
-        //NSLog("Downloading... %@", str)
+        NSLog("Downloading... %@", str)
     }
 
     func playerItem(_ playerItem: CachingPlayerItem, downloadingFailedWith error: Error){

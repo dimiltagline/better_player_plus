@@ -279,6 +279,9 @@ bool _remoteCommandsInitialized = false;
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
 
+    NSLog(@"handleMethodCall =============> :: %@", call.method);
+    NSDictionary *argsMap = call.arguments;
+    NSLog(@"handleMethodCall =============> :: %@", argsMap);
 
     if ([@"init" isEqualToString:call.method]) {
         // Allow audio playback when the Ring/Silent switch is set to silent
@@ -292,6 +295,7 @@ bool _remoteCommandsInitialized = false;
         BetterPlayer* player = [[BetterPlayer alloc] initWithFrame:CGRectZero];
         NSDictionary *argsMap = call.arguments;
 
+        NSLog(@"handleMethodCall create =============> :: %@", argsMap);
         if ([argsMap objectForKey:@"maxBufferMs"] != [NSNull null]){
             NSNumber *parseNumber = argsMap[@"maxBufferMs"];
             float maxBufferMs = [parseNumber floatValue] / 1000;
@@ -307,6 +311,7 @@ bool _remoteCommandsInitialized = false;
             [player clear];
             // This call will clear cached frame because we will return transparent frame
 
+            NSLog(@"handleMethodCall setDataSource =============> :: %@", argsMap);
             NSDictionary* dataSource = argsMap[@"dataSource"];
             [_dataSourceDict setObject:dataSource forKey:[self getTextureId:player]];
             NSString* assetArg = dataSource[@"asset"];

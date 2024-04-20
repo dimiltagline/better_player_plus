@@ -230,6 +230,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
         _overriddenDuration = overriddenDuration;
     }
 
+//    NSLog(@"setPreferredForwardBufferDuration =============> :: %@", @(_bufferDuration));
     if (@available(iOS 10.0, *)) {
         [item setPreferredForwardBufferDuration:_bufferDuration];
     }
@@ -277,6 +278,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 }
 
 -(void)handleStalled {
+//    NSLog(@"handleStalled=============> :: %@", @(_isStalledCheckStarted));
     if (_isStalledCheckStarted){
         return;
     }
@@ -285,6 +287,9 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 }
 
 -(void)startStalledCheck{
+//    NSLog(@"startStalledCheck availableDuration=============> :: %@", @([self availableDuration]));
+//    NSLog(@"startStalledCheck currentTime=============> :: %@", @(CMTimeGetSeconds(_player.currentItem.currentTime)));
+
     if (_player.currentItem.playbackLikelyToKeepUp ||
         [self availableDuration] - CMTimeGetSeconds(_player.currentItem.currentTime) > 10.0) {
         [self play];
@@ -307,6 +312,8 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 - (NSTimeInterval) availableDuration
 {
     NSArray *loadedTimeRanges = [[_player currentItem] loadedTimeRanges];
+//    NSLog(@"availableDuration =============> :: %@", @(loadedTimeRanges.count));
+
     if (loadedTimeRanges.count > 0){
         CMTimeRange timeRange = [[loadedTimeRanges objectAtIndex:0] CMTimeRangeValue];
         Float64 startSeconds = CMTimeGetSeconds(timeRange.start);
@@ -546,6 +553,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 
 - (void)setBufferDuration:(NSTimeInterval)bufferDuration {
     _bufferDuration = bufferDuration;
+//    NSLog(@"setBufferDuration =============> :: %@", @(_bufferDuration));
 }
 
 - (void)setVolume:(double)volume {
