@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) float playerRate;
 @property(nonatomic) int overriddenDuration;
 @property(nonatomic) AVPlayerTimeControlStatus lastAvPlayerTimeControlStatus;
-@property(nonatomic, readonly) NSTimeInterval bufferDuration;
+//@property(nonatomic, readonly) NSTimeInterval bufferDuration;
 - (void)play;
 - (void)pause;
 - (void)setIsLooping:(bool)isLooping;
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)disablePictureInPicture;
 - (int64_t)absolutePosition;
 - (int64_t) FLTCMTimeToMillis:(CMTime) time;
-- (void)setBufferDuration:(NSTimeInterval)bufferDuration;
+//- (void)setBufferDuration:(NSTimeInterval)bufferDuration;
 
 - (void)clear;
 - (void)disposeSansEventChannel;

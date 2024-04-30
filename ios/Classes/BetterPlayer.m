@@ -33,7 +33,7 @@ AVPictureInPictureController *_pipController;
         _player.automaticallyWaitsToMinimizeStalling = false;
     }
     self._observersAdded = false;
-    _bufferDuration = 0;
+//    _bufferDuration = 0;
     return self;
 }
 
@@ -231,9 +231,9 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     }
 
 //    NSLog(@"setPreferredForwardBufferDuration =============> :: %@", @(_bufferDuration));
-    if (@available(iOS 10.0, *)) {
-        [item setPreferredForwardBufferDuration:_bufferDuration];
-    }
+//    if (@available(iOS 10.0, *)) {
+//        [item setPreferredForwardBufferDuration:_bufferDuration];
+//    }
     return [self setDataSourcePlayerItem:item withKey:key];
 }
 
@@ -551,10 +551,10 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     _isLooping = isLooping;
 }
 
-- (void)setBufferDuration:(NSTimeInterval)bufferDuration {
-    _bufferDuration = bufferDuration;
-//    NSLog(@"setBufferDuration =============> :: %@", @(_bufferDuration));
-}
+//- (void)setBufferDuration:(NSTimeInterval)bufferDuration {
+//    _bufferDuration = bufferDuration;
+////    NSLog(@"setBufferDuration =============> :: %@", @(_bufferDuration));
+//}
 
 - (void)setVolume:(double)volume {
     _player.volume = (float)((volume < 0.0) ? 0.0 : ((volume > 1.0) ? 1.0 : volume));

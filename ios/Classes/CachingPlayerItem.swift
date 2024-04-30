@@ -2,6 +2,7 @@
 
 import Foundation
 import AVFoundation
+import os
 
 fileprivate extension URL {
     
@@ -46,6 +47,10 @@ open class CachingPlayerItem: AVPlayerItem {
         var response: URLResponse?
         var pendingRequests = Set<AVAssetResourceLoadingRequest>()
         weak var owner: CachingPlayerItem?
+        private static let logger = Logger(
+                        subsystem: Bundle.main.bundleIdentifier!,
+                        category: String(describing: CachingPlayerItem.self)
+                    )
         
         func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
             if playingFromData {
@@ -64,6 +69,7 @@ open class CachingPlayerItem: AVPlayerItem {
         }
         
         func startDataRequest(url: URL) {
+//            Self.logger.critical("startDataRequest ==========> URL: \(url)")
             let configuration = URLSessionConfiguration.default
             configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
             session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
@@ -76,6 +82,7 @@ open class CachingPlayerItem: AVPlayerItem {
                     else {
                         continue
                     }
+//                    Self.logger.critical("startDataRequest=============> Header Key: \(headerKey) Value: \(headerValueString)")
                     request.setValue(headerValueString, forHTTPHeaderField: headerKey)
                     
                 }

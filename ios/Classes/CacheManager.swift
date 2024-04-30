@@ -3,8 +3,15 @@ import Cache
 import HLSCachingReverseProxyServer
 import GCDWebServer
 import PINCache
+import Foundation
+import os
 
 @objc public class CacheManager: NSObject {
+
+    private static let logger = Logger(
+            subsystem: Bundle.main.bundleIdentifier!,
+            category: String(describing: CacheManager.self)
+        )
 
     // We store the last pre-cached CachingPlayerItem objects to be able to play even if the download
     // has not finished.
@@ -46,9 +53,11 @@ import PINCache
     }
     
     @objc public func setMaxCacheSize(_ maxCacheSize: NSNumber?){
+//    Self.logger.critical("Setting max cache size =========>")
         if let unsigned = maxCacheSize {
             let _maxCacheSize = unsigned.uintValue
-            diskConfig = DiskConfig(name: "BetterPlayerCache", expiry: .date(Date().addingTimeInterval(3600*24*30)), maxSize: _maxCacheSize)
+            diskConfig = DiskConfig(name: "BetterPlayerCache", expiry: .date(Date().addingTimeInterval(3600*24*7)),
+            maxSize: _maxCacheSize)
         }        
     }
 
