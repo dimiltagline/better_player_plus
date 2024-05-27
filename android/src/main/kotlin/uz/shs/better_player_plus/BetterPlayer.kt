@@ -114,7 +114,7 @@ internal class BetterPlayer(
         loadControl = loadBuilder.build()
         exoPlayer = ExoPlayer.Builder(context)
             //it will try to find the available media codec from all the available codec lists
-            .setRenderersFactory(DefaultRenderersFactory(this).setEnableDecoderFallback(true))
+            .setRenderersFactory(DefaultRenderersFactory(context).setEnableDecoderFallback(true))
             .setTrackSelector(trackSelector)
             .setLoadControl(loadControl)
             .build()
