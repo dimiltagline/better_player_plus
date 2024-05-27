@@ -291,7 +291,8 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 //    NSLog(@"startStalledCheck currentTime=============> :: %@", @(CMTimeGetSeconds(_player.currentItem.currentTime)));
 
     if (_player.currentItem.playbackLikelyToKeepUp ||
-        [self availableDuration] - CMTimeGetSeconds(_player.currentItem.currentTime) > 10.0) {
+//        [self availableDuration] - CMTimeGetSeconds(_player.currentItem.currentTime) > 10.0) {
+        [self availableDuration] - CMTimeGetSeconds(_player.currentItem.currentTime) > 5.0) {
         [self play];
     } else {
         _stalledCount++;
@@ -752,7 +753,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     // This line ensures the 'initialized' event is sent when the event
     // 'AVPlayerItemStatusReadyToPlay' fires before _eventSink is set (this function
     // onListenWithArguments is called)
-    [self onReadyToPlay];
+//    [self onReadyToPlay];
     return nil;
 }
 

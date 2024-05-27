@@ -49,6 +49,7 @@ import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
 import androidx.media3.exoplayer.dash.DashMediaSource
@@ -112,6 +113,8 @@ internal class BetterPlayer(
         )
         loadControl = loadBuilder.build()
         exoPlayer = ExoPlayer.Builder(context)
+            //it will try to find the available media codec from all the available codec lists
+            .setRenderersFactory(DefaultRenderersFactory(this).setEnableDecoderFallback(true))
             .setTrackSelector(trackSelector)
             .setLoadControl(loadControl)
             .build()
