@@ -334,7 +334,7 @@ bool _remoteCommandsInitialized = false;
             if (useCacheObject != [NSNull null]) {
                 useCache = [[dataSource objectForKey:@"useCache"] boolValue];
                 if (useCache){
-                    NSLog(@"handleMethodCall maxCacheSize =============> :: %@", maxCacheSize);
+//                    NSLog(@"handleMethodCall maxCacheSize =============> :: %@", maxCacheSize);
                     [_cacheManager setMaxCacheSize:maxCacheSize];
                 }
             }
